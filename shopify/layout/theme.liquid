@@ -29,6 +29,7 @@
     <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer>
     </script>
 
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
     {{ 'bundle.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
 

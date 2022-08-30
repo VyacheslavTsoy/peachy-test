@@ -1,0 +1,48 @@
+{% assign sectionBg = section.settings.bg %}
+{% assign sectionTitle = section.settings.title %}
+{% assign collectionHandle = section.settings.related_collection %}
+
+<div class="products" {% if sectionBg %}style="background-image: url({{ sectionBg | img_url: 'master' }});"{% endif %}>
+  <div class="container">
+    {% if sectionTitle != empty %}
+      <h2 class="products__title">{{ sectionTitle }}</h2>
+    {% endif %}
+
+
+    {% if section.settings.related_collection != empty %}
+    <div class="products__list">
+      {% for product in collections[collectionHandle].products %}
+        {% render 'product-item', product: product %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Products",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "related_collection",
+      "label": "Related Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products"
+    }
+  ]
+}
+{% endschema %}
