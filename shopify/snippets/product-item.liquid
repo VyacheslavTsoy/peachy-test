@@ -22,7 +22,7 @@
       </div>
     {% endif %}
     <div class="product-item__action">
-      <button class="product-item__btn">$11.99 USD | add to cart</button>
+      <button class="product-item__btn" type="button">{{ product.price | money_with_currency }} | add to cart</button>
     </div>
   </div>
 </div>

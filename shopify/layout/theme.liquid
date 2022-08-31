@@ -29,7 +29,6 @@
     <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer>
     </script>
 
-    {{ 'fonts.css' | asset_url | stylesheet_tag }}
     {{ 'bundle.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}
 
@@ -60,6 +59,16 @@
 
       jQuery(function() {
         CartJS.init({{ cart | json }});
+
+        $(".product-item__btn").on('click', function () {
+          const currentBtn = $(this);
+          const currentProductItem = currentBtn.closest('.product-item');
+          const currentVariantID = currentProductItem.find('.product-item__variants-select').val();
+
+          if (currentVariantID) {
+            CartJS.addItem(currentVariantID);
+          }
+        })
       });
     </script>
   </head>

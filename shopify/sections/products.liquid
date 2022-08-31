@@ -2,8 +2,8 @@
 {% assign sectionTitle = section.settings.title %}
 {% assign collectionHandle = section.settings.related_collection %}
 
-<div class="products" {% if sectionBg %}style="background-image: url({{ sectionBg | img_url: 'master' }});"{% endif %}>
-  <div class="container">
+<div class="products" {% if sectionBg %}style="background-image: url({{ sectionBg | img_url: 'master' }});"{% endif %} data-section-type="products" data-section-id="{{ section.id }}">
+    <div class="container">
     {% if sectionTitle != empty %}
       <h2 class="products__title">{{ sectionTitle }}</h2>
     {% endif %}
@@ -11,9 +11,14 @@
 
     {% if section.settings.related_collection != empty %}
     <div class="products__list">
+      <div class="swiper-wrapper">
       {% for product in collections[collectionHandle].products %}
-        {% render 'product-item', product: product %}
+        <div class="swiper-slide">
+          {% render 'product-item', product: product %}
+        </div>
       {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
     {% endif %}
   </div>
